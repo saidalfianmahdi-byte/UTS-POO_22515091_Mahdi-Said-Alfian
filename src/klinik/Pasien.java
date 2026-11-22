@@ -43,6 +43,7 @@ public class Pasien {
         this.nama = nama.trim();
     }
 
+
     public void setUmur(int umur) {
         if (umur < 0 || umur > 120) {
             throw new IllegalArgumentException("Umur pasien harus antara 0 sampai 120.");
@@ -79,5 +80,4 @@ public class Pasien {
     public boolean isLansia() {
         return umur >= 60;
     }
-
 }
