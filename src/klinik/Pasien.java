@@ -79,4 +79,5 @@ public class Pasien {
     public boolean isLansia() {
         return umur >= 60;
     }
+
 }
