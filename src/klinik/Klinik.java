@@ -2,10 +2,7 @@ package klinik;
 
 import java.util.ArrayList;
 
-/**
- * Class pengelola: menyimpan data pasien, dokter, kunjungan, dan riwayat (Stack),
- * serta menjalankan aturan bisnis.
- */
+
 public class Klinik {
     private String namaKlinik;
     private String alamat;
@@ -47,7 +44,6 @@ public class Klinik {
         this.alamat = alamat.trim();
     }
 
-    /** Menambah pasien; ID tidak boleh duplikat. */
     public boolean tambahPasien(Pasien pasien) {
         if (pasien == null) {
             return false;
@@ -61,7 +57,6 @@ public class Klinik {
         return true;
     }
 
-    /** Menambah dokter; ID tidak boleh duplikat. */
     public boolean tambahDokter(Dokter dokter) {
         if (dokter == null) {
             return false;
@@ -93,7 +88,6 @@ public class Klinik {
         return null;
     }
 
-    /** Mencari pasien berdasarkan ID atau nama. */
     public Pasien cariPasien(String kunci) {
         for (Pasien p : daftarPasien) {
             if (p.getIdPasien().equalsIgnoreCase(kunci) || p.getNama().equalsIgnoreCase(kunci)) {
@@ -103,7 +97,6 @@ public class Klinik {
         return null;
     }
 
-    /** Mencari dokter berdasarkan ID atau nama. */
     public Dokter cariDokter(String kunci) {
         for (Dokter d : daftarDokter) {
             if (d.getIdDokter().equalsIgnoreCase(kunci) || d.getNama().equalsIgnoreCase(kunci)) {
@@ -123,10 +116,7 @@ public class Klinik {
         return null;
     }
 
-    /**
-     * Membuat kunjungan baru. Aturan bisnis yang dicek:
-     * pasien ada, dokter ada, dokter belum 5 kunjungan, riwayat (Stack) belum penuh.
-     */
+    
     public boolean buatKunjungan(String idPasien, String idDokter, String tanggal, String keluhan) {
         if (tanggal == null || tanggal.trim().isEmpty() || keluhan == null || keluhan.trim().isEmpty()) {
             System.out.println("[GAGAL] Tanggal dan keluhan tidak boleh kosong.");
@@ -142,7 +132,7 @@ public class Klinik {
             System.out.println("[GAGAL] Dokter dengan ID " + idDokter + " tidak ditemukan.");
             return false;
         }
-        // Aturan bisnis: satu dokter maksimal 5 kunjungan per hari
+        
         if (!dokter.bisaMenerimaKunjungan()) {
             System.out.println("[GAGAL] " + dokter.getNama() + " sudah mencapai batas "
                     + Dokter.MAKS_KUNJUNGAN + " kunjungan hari ini.");
@@ -166,7 +156,6 @@ public class Klinik {
         return true;
     }
 
-    /** Pop dari Stack lalu batalkan kunjungan tersebut. */
     public boolean batalkanKunjunganTerakhir() {
         Kunjungan k = riwayatKunjungan.pop();
         if (k == null) {
@@ -214,7 +203,7 @@ public class Klinik {
         System.out.println("[OK] Hitungan kunjungan harian semua dokter di-reset.");
     }
 
-    /** Ringkasan: jumlah data dan total biaya (kunjungan yang tidak dibatalkan). */
+
     public void tampilkanLaporan() {
         double total = 0;
         int aktif = 0;
